@@ -75,7 +75,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: sarif_files
-          path: /**/*.sarif
+          path: ${{github.workspace}}/*.sarif
 
       - name: Test
         working-directory: ${{github.workspace}}/build/test
