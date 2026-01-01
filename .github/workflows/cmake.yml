@@ -60,7 +60,7 @@ jobs:
 
       - uses: actions/upload-artifact@v4
         with:
-          name: sarif_files
+          name: sarif_files${{ matrix.os }}
           path: ${{github.workspace}}/**/*.sarif
 
       - name: Test
