@@ -60,10 +60,10 @@ jobs:
         # To get around this use a relative path instead.
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
-            export CXX_FLAGS="/experimental:log"
+            export CXXFLAGS="/experimental:log"
             cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
           else
-            export CXX_FLAGS="-fdiagnostics-format=sarif-file"
+            export CXXFLAGS="-fdiagnostics-format=sarif-file"
             cmake -DTEST=ON -B ${{github.workspace}}/build
           fi;
         shell: bash
