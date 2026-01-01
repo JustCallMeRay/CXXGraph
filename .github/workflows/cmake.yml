@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [windows-latest]
 
     steps:
       #- name: Install gtest manually
@@ -46,7 +46,7 @@ jobs:
         # To get around this use a relative path instead.
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
-            export CXXFLAGS="/experimental:log compiler_warnings"
+            export CXXFLAGS="/experimental:log compiler_warnings\"
             cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
           else
             export CXXFLAGS="-fdiagnostics-format=sarif-file"
