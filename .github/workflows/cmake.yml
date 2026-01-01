@@ -41,7 +41,7 @@ jobs:
       - name: Get Cmake 4.X
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
-            choco install cmake-4
+            choco install cmake
           else
             # get cmake 4
             test -f /usr/share/doc/kitware-archive-keyring/copyright || wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
@@ -60,15 +60,9 @@ jobs:
         # To get around this use a relative path instead.
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
-            cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
+            cmake -DTEST=ON -Dgtest_disable_pthreads=ON --sarif-output=./sarif.json -B ./build
           else
-            # get cmake 4
-            test -f /usr/share/doc/kitware-archive-keyring/copyright || wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
-            echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ noble main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-            sudo apt-get update
-            sudo apt-get install cmake -y
-
-            cmake -DTEST=ON -B ${{github.workspace}}/build --sarif-output=./sarif.json
+            cmake -DTEST=ON --sarif-output=./sarif.json -B ${{github.workspace}}/build
           fi;
         shell: bash
 
