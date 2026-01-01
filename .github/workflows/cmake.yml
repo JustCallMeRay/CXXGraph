@@ -49,7 +49,7 @@ jobs:
             mkdir compiler_warnings
             mkdir build\compiler_warnings
             
-            export CXXFLAGS="/experimental:log compiler_warnings\\"
+            export CXXFLAGS="/experimental:log ${{github.workspace}}\\compiler_warnings\\"
             cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
           else
             export CXXFLAGS="-fdiagnostics-format=sarif-file"
