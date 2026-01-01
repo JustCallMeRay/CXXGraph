@@ -60,9 +60,11 @@ jobs:
         # To get around this use a relative path instead.
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
-            cmake -DTEST=ON -Dgtest_disable_pthreads=ON --sarif-output=./sarif.json -B ./build
+            export CXX_FLAGS="/experimental:log"
+            cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
           else
-            cmake -DTEST=ON --sarif-output=./sarif.json -B ${{github.workspace}}/build
+            export CXX_FLAGS="-fdiagnostics-format=sarif-file"
+            cmake -DTEST=ON -B ${{github.workspace}}/build
           fi;
         shell: bash
 
@@ -73,7 +75,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: sarif_file
-          path: ./sarif.json
+          path: ./*.sarif
 
       - name: Test
         working-directory: ${{github.workspace}}/build/test
