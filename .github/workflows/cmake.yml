@@ -70,6 +70,11 @@ jobs:
         # Build your program with the given configuration
         run: cmake --build ${{github.workspace}}/build
 
+      - uses: actions/upload-artifact@v4
+        with:
+          name: sarif_file
+          path: ./sarif.json
+
       - name: Test
         working-directory: ${{github.workspace}}/build/test
         # Execute tests defined by the CMake configuration.
