@@ -47,6 +47,8 @@ jobs:
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
             mkdir compiler_warnings
+            mkdir build\compiler_warnings
+            
             export CXXFLAGS="/experimental:log compiler_warnings\\"
             cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
           else
