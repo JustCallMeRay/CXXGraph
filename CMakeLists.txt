@@ -20,30 +20,9 @@ endif(DEBUG)
 if (MSVC)
 	add_compile_options(/bigobj)
   add_compile_options(
-    /WX
     /W4
-    /w14254
-    /w14263
-    /w14265
-    /w14296
-    /w14311
-    /w14545
-    /w14546
-    /w14547
-    /w14549
-    /w14555
-    /w14619
-    /w14640
-    /w14905
-    /w14906
-    /w14928
-    /we4289
+    /Wall
     /permissive-
-    /wd4127
-    /wd4244
-    /wd4456
-    /wd4458
-    /wd4459
   )
 else ()
 	option(SANITIZE "Enable Sanitize" OFF)
@@ -63,7 +42,6 @@ else ()
     -Wdouble-promotion
     -Wextra
     -Wpedantic
-    -Wno-unused-parameter
   )
 endif(MSVC)
 

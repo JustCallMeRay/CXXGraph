@@ -46,9 +46,9 @@ jobs:
         # To get around this use a relative path instead.
         run: |
           if [ ${{ matrix.os }} == 'windows-latest' ]; then
-            cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build
+            cmake -DTEST=ON -Dgtest_disable_pthreads=ON -B ./build --sarif-output=./sarif.json
           else
-            cmake -DTEST=ON -B ${{github.workspace}}/build
+            cmake -DTEST=ON -B ${{github.workspace}}/build --sarif-output=./sarif.json
           fi;
         shell: bash
 
