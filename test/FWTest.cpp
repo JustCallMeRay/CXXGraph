@@ -49,8 +49,8 @@ TEST(FWTest, test_1) {
   for (const auto &elem1 : nodeSet) {
     col = 0;
     for (const auto &elem2 : nodeSet) {
-      auto key = std::make_pair(elem1->getUserId(), elem2->getUserId());
-      pairwise_dist[key] = values[row][col];
+      auto key_ = std::make_pair(elem1->getUserId(), elem2->getUserId());
+      pairwise_dist[key_] = values[row][col];
       col += 1;
     }
     row += 1;
